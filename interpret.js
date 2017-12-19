@@ -43,7 +43,7 @@ process.stdin.on('data', stdin => {
     (new ChatScriptConnector({
         port: process.env.CSPORT,
         host: process.env.CSHOST,
-        identity: process.env.USER,
+        identity: process.env.fullName,
         botname: process.env.BOT,
     }))
     .chat(stdin.toString())
