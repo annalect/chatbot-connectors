@@ -39,14 +39,14 @@ module.exports = ChatScriptConnector
 
 /* interpret.js can act as a standalone executable! pipe input to stdin and receive JSON on stdout */
 
-process.stdin.on('data', stdin => {
+if(process.argv[1]){
     (new ChatScriptConnector({
         port: process.env.CSPORT,
         host: process.env.CSHOST,
         identity: process.env.fullName,
         botname: process.env.BOT,
     }))
-    .chat(stdin.toString())
+    .chat(process.argv[1])
     .then(response => {
         process.stdout.write(response)   
         process.exit()
@@ -55,4 +55,22 @@ process.stdin.on('data', stdin => {
         process.stderr.write(util.inspect(error))
         process.exit()
     })
-})
+}
+
+// process.stdin.on('data', stdin => {
+//     (new ChatScriptConnector({
+//         port: process.env.CSPORT,
+//         host: process.env.CSHOST,
+//         identity: process.env.fullName,
+//         botname: process.env.BOT,
+//     }))
+//     .chat(stdin.toString())
+//     .then(response => {
+//         process.stdout.write(response)   
+//         process.exit()
+//     })
+//     .catch(error => {
+//         process.stderr.write(util.inspect(error))
+//         process.exit()
+//     })
+// })
