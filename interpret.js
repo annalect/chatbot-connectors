@@ -43,7 +43,7 @@ if(process.argv[2]){
     (new ChatScriptConnector({
         port: process.env.CSPORT,
         host: process.env.CSHOST,
-        identity: process.env.fullName,
+        identity: process.env.personId,
         botname: process.env.BOT,
     }))
     .chat(process.argv[2])
